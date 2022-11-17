@@ -5,6 +5,7 @@ var myLocation = document.getElementById('userInput');
 var searchButton = document.getElementById('search');
 var fiveDayForecast = 6;
 
+var searchedCity;
 function showHistoryItem() {
 
     
@@ -58,6 +59,7 @@ function getLocation() {
 // Searches the weather for the location the user has entered, using the weather api to access up to date information
 function lookUp(search) {
 
+  searchedCity = search
   var apiURL = `${API_URL}/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`
 
   fetch(apiURL)
@@ -145,7 +147,7 @@ function getWeather(lat, lon) {
   
     
       var forecast = forecastData.current
-      var cityname = forecast.name
+      var cityname = searchedCity
       var day = new Date(forecast.dt * 1000).toLocaleDateString('en-GB');
       var iconCode = forecast.weather[0].icon; 
       var temp = `Temperature: ${forecast.temp}°F`;
@@ -156,7 +158,7 @@ function getWeather(lat, lon) {
       dailyWeather.innerHTML =
        
       `
-      <div>
+      <div id="name">
         ${cityname}
       </div>
       <div id="date">
