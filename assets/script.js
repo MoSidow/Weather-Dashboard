@@ -52,11 +52,11 @@ function getLocation() {
 
  
 
-  // Outputs the result of the function once the user has searched for their desired location
+  // Shows result of location user has enetered
   lookUp(userInput);
 }
 
-// Searches the weather for the location the user has entered, using the weather api to access up to date information
+// Searches the weather for the location the user entered
 function lookUp(search) {
 
   searchedCity = search
@@ -67,10 +67,10 @@ function lookUp(search) {
 
     .then(data => {
 
-      // Sets the locations weather information (lat, lon, humidity, temp) into an object, displaying it into the console
+      // Sets the locations weather information 
       const locationInput = data[0];
 
-      console.log(locationInput);
+     
 
       displayForecast(locationInput);
     });
@@ -84,10 +84,9 @@ function FutureWeather(forecastData) {
   const dailyWeathereFuture = document.getElementById('Futureweather');
   dailyWeathereFuture.innerHTML = '';
 
-  // Looping through the five days, displaying each day and its weather
+  // for loop, loops through the five days, displaying each day and its weather
   for (var i = 1; i < fiveDayForecast; i++) {
     var forecast = forecastData.daily[i];
-    console.log(forecast);
     var day = new Date(forecast.dt * 1000).toLocaleDateString('en-GB');
     var iconCode = forecast.weather[0].icon; 
     var temp = `Temperature: ${forecast.temp.day}°F`;
@@ -96,7 +95,7 @@ function FutureWeather(forecastData) {
 
     var forecastList = document.createElement('div');
     forecastList.classList.add('daily-weather-style');
-    // Creates the html tags for the next 5 days with the styles included
+    // Creates the html for the 5 days
     forecastList.innerHTML =
       `
     <div id="date">
@@ -120,10 +119,10 @@ function FutureWeather(forecastData) {
   }
 }
 
-// Retrives the weather for the current and future 5 days
+// fetches the weather for the current and future days
 function getWeather(lat, lon) {
 
-  // Fetches the url to include the locations weather infomation (wind speed/pressure, chances of rain)
+  // Fetches the url to include the locations weather data
   var queryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=d91f911bcf2c0f925fb6535547a5ddc9`
   fetch(queryURL)
     .then(function (response) {
@@ -137,8 +136,8 @@ function getWeather(lat, lon) {
     })
 }
 
-// Displays the extra information about the location other than its temperature for the current day the user has submitted it
-// Examples: humidity, wind speed, chance of rain, pressure
+
+// Display current weather data
 
   function CurrentWeather(forecastData) {
 
@@ -181,10 +180,9 @@ function getWeather(lat, lon) {
       
   }
 
-// Displays the weather forecast for the location and its country
+// Displays the weather forecast for location
 function displayForecast(forecastData) {
   document.getElementById('userInput').textContent = `${forecastData.name}`, `${forecastData.country}`;
-  console.log(forecastData);
   getWeather(forecastData.lat, forecastData.lon);
 }
 
