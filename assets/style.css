@@ -105,6 +105,7 @@ transition: all 0.6s ease-in-out;
 
     footer{
         text-align: center;
+        margin-top: 2%;
     }
 
     .daily-weather-style {
@@ -126,6 +127,8 @@ transition: all 0.6s ease-in-out;
         font-weight: bolder;
         font-size: larger;
     }
+
+   
 
 
 
